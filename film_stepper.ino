@@ -15,6 +15,7 @@ unsigned long slowMicrosBetweenSteps = 1500; // microseconds
 unsigned long fastMicrosBetweenSteps = 300;
 unsigned long stepIntervalMicros;
 unsigned long stepAdjustmentMicros;
+
 int stepsPerRev = 200;
 int numAccelSteps = 100; // 100 is a half turn of a 200 step motor
 int revolutions = 20;
@@ -26,25 +27,27 @@ byte direction = 1;
 
 void setup() {
 
-    Serial.begin(115200);
-    Serial.println("Starting Stepper Demo with acceleration");
+//    Serial.begin(115200);
+//    Serial.println("Starting Stepper Demo with acceleration");
+//
+//    pinMode(directionPin, OUTPUT);
+//    pinMode(stepPin, OUTPUT);
+//    pinMode(enablePin, OUTPUT);
+//    //pinMode(ledPin, OUTPUT);
+//
+//    digitalWrite(enablePin, LOW);
+//
+//    stepAdjustmentMicros = (slowMicrosBetweenSteps - fastMicrosBetweenSteps) / numAccelSteps;
+//    stepIntervalMicros = slowMicrosBetweenSteps;
+//    stepsToGo = numSteps;
+//    digitalWrite(directionPin, direction);
 
-    pinMode(directionPin, OUTPUT);
-    pinMode(stepPin, OUTPUT);
-    pinMode(enablePin, OUTPUT);
-    //pinMode(ledPin, OUTPUT);
-
-    digitalWrite(enablePin, LOW);
-
-    stepAdjustmentMicros = (slowMicrosBetweenSteps - fastMicrosBetweenSteps) / numAccelSteps;
-    stepIntervalMicros = slowMicrosBetweenSteps;
-    stepsToGo = numSteps;
-    digitalWrite(directionPin, direction);
+    hello();
 }
 
 void loop() {
 
-    moveMotor();
+//    moveMotor();
 
 }
 
