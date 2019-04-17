@@ -3,9 +3,14 @@
 
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
-void hello()
+void displayInit()
 {
   lcd.begin(16,2);
-  lcd.clear();
-  lcd.print("hello world");
+  lcd.clear;
+}
+
+void hello()
+{
+  displayInit();
+  lcd.print("hello there!");
 }
