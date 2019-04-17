@@ -23,7 +23,7 @@ void moveMotor() {
           Serial.println(stepAdjustmentMicros);
 //        direction = ! direction;
 //        digitalWrite(directionPin, direction);
-//            // next two lines just for the demo
+//        // next two lines just for the demo
 //        delay(2000);
 //        Serial.println("Changing direction");
 //        stepsToGo = numSteps;

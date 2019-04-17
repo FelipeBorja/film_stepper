@@ -1,16 +1,20 @@
-#include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+// screenPrint -Prints a string 'str' to the LCD screen,
+// holds it for 'hold_time' amount of ms, and repeats it
+// 'total_times' amount of times
 
-LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
-void displayInit()
+void screenPrint(String str, int hold_time, int total_times)
 {
   lcd.begin(16,2);
-  lcd.clear;
-}
-
-void hello()
-{
-  displayInit();
-  lcd.print("hello there!");
+  for(int i=0; i<total_times; i++)
+  {
+    lcd.clear();
+    lcd.print(str);
+    delay(hold_time);
+    lcd.clear();
+    // only trigger delay for repeat cases
+    if(total_times > 1){
+      delay(500);
+    }    
+  }
 }
