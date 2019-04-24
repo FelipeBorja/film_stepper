@@ -10,9 +10,13 @@
 byte directionPin = 9;
 byte stepPin = 8;
 byte enablePin = 10;
+// Pins for the LCD screen
+byte sdaPin = 4;
+byte sclPin = 5;
 
 // Predetermined times in microseconds
 unsigned long prevStepMicros = 0;
+// Delays between steps. For slower movements the delay is longer.
 unsigned long slowMicrosBetweenSteps = 1500;
 unsigned long fastMicrosBetweenSteps = 300;
 unsigned long stepIntervalMicros;
@@ -20,6 +24,7 @@ unsigned long stepAdjustmentMicros;
 
 // Steps and revolutions
 int stepsPerRev = 200;
+// number of steps needed to accelerate
 int numAccelSteps = 100; // 100 is a half turn of a 200 step motor
 int revolutions = 20;
 
@@ -28,7 +33,8 @@ int stepsToGo;
 byte direction = 1;
 
 // Initialize LCD screen with I2C backpack.
-LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
+// Hardware initialized like so: LiquidCrystal_I2C lcdname(addr,en,rw,rs,d4,d5,d6,d7,bl,blpol);
+LiquidCrystal_I2C lcd(0x27, 2, 1, 0, sdaPin, sclPin, 6, 7, 3, POSITIVE);
 
 
 void setup() {
@@ -42,6 +48,7 @@ void setup() {
     pinMode(enablePin, OUTPUT);
     
     digitalWrite(enablePin, LOW);
+    // If we want to accelerate, we need to slowly increase the step sizes over time.
     stepAdjustmentMicros = (slowMicrosBetweenSteps - fastMicrosBetweenSteps) / numAccelSteps;
     stepIntervalMicros = slowMicrosBetweenSteps;
     stepsToGo = numSteps;
