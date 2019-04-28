@@ -15,12 +15,12 @@ byte sdaPin = 4;
 byte sclPin = 5;
 
 // Predetermined times in microseconds
-unsigned long prevStepMicros = 0;
+unsigned long prevStepTime = 0;
 // Delays between steps. For slower movements the delay is longer.
-unsigned long slowMicrosBetweenSteps = 1500;
-unsigned long fastMicrosBetweenSteps = 300;
-unsigned long stepIntervalMicros;
-unsigned long stepAdjustmentMicros;
+unsigned long slowInterval = 1500;
+unsigned long fastInterval = 300;
+unsigned long stepInterval;
+unsigned long stepAdjustment;
 
 // Steps and revolutions
 int stepsPerRev = 200;
@@ -28,8 +28,8 @@ int stepsPerRev = 200;
 int numAccelSteps = 100; // 100 is a half turn of a 200 step motor
 int revolutions = 20;
 
-int numSteps = revolutions * stepsPerRev;
-int stepsToGo;
+int totalSteps = revolutions * stepsPerRev;
+int stepCounter;
 byte direction = 1;
 
 // Initialize LCD screen with I2C backpack.
@@ -49,9 +49,9 @@ void setup() {
     
     digitalWrite(enablePin, LOW);
     // If we want to accelerate, we need to slowly increase the step sizes over time.
-    stepAdjustmentMicros = (slowMicrosBetweenSteps - fastMicrosBetweenSteps) / numAccelSteps;
-    stepIntervalMicros = slowMicrosBetweenSteps;
-    stepsToGo = numSteps;
+    stepAdjustment = (slowInterval - fastInterval) / numAccelSteps;
+    stepInterval = slowInterval;
+    stepCounter = totalSteps;
     digitalWrite(directionPin, direction);
 
     screenPrint("starting up", 500, 3);
