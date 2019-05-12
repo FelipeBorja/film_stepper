@@ -1,8 +1,13 @@
-// screenPrint -Prints a string 'str' to the LCD screen,
-// holds it for 'hold_time' amount of ms, and repeats it
-// 'total_times' amount of times
-
-
+/*
+ * screenPrint - Prints a string 'str' to the LCD screen,
+ * holds it for 'hold_time' amount of ms, and repeats it
+ * 'total_times' amount of times
+ * 
+ * Note: has internal delay, so does not work with the current setup of
+ *       the move motor function.
+ *       Needs to be re-written with the same microsecond counting to work
+ *       alongside the other function.
+ */
 void screenPrint(String str, int hold_time, int total_times)
 {
   lcd.begin(16,2);

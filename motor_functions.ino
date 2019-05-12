@@ -46,13 +46,19 @@ void moveMotor() {
     else {
           Serial.print("reached end. stepDelta: ");
           Serial.println(stepAdjustment);
-//        direction = ! direction;
-//        digitalWrite(directionPin, direction);
-//            // next two lines just for the demo
-//        delay(2000);
-//        Serial.println("Changing direction");
-//        stepCounter = totalSteps;
-//        prevStepTime = micros();
+          /*
+           * Code for switching direction
+           */
+        direction = ! direction;
+        digitalWrite(directionPin, direction);
+            // next two lines just for the demo
+        Serial.println("Changing direction");
+        lcd.clear();
+        lcd.print("Changing direction");
+        delay(3000);
+        lcd.clear();
+        stepCounter = totalSteps;
+        prevStepTime = micros();
     }
 }
 
@@ -93,4 +99,3 @@ int getInterval(int steps, double metersPerSec, double travelDist) {
     int interval = (timeSec*1000000)/steps;
     return interval;
 }
-

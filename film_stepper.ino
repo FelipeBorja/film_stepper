@@ -4,7 +4,7 @@
  * 
 */
 #include <Wire.h>
-//#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal_I2C.h>
 
 /*
  * Pin setup:
@@ -21,14 +21,14 @@ byte sclPin = 5;
  * Motor Properties:
  */
 int stepsPerRev = 200;  // = 360/step angle of motor
-byte direction = 1;
+byte direction = 0;
 
 /*
  * Setup variables for simple movement
  */
 // Delays between steps. For slower movements the delay is longer.
 unsigned long slowInterval = 1500;
-unsigned long fastInterval = 300; // fastest is capped at 300
+unsigned long fastInterval = 500; // fastest is capped at 300, should double check with testing
 // number of steps needed to accelerate
 int numAccelSteps = 100; // 100 is a half turn of a 200 step motor
 int revolutions = 20;
@@ -61,8 +61,8 @@ void setup() {
     /*
      * Setup variables for move motor function
      */
-    totalSteps = revolutions * stepsPerRev;
-    //totalSteps = getSteps(24.0, 0.891);
+    //totalSteps = revolutions * stepsPerRev;
+    totalSteps = getSteps(10.0, 0.891);    //8.0 ends up giving 5.5" of travel. can be calibrated more
     // step change if we're accelerating
     stepAdjustment = (slowInterval - fastInterval) / numAccelSteps;
     stepInterval = slowInterval;
@@ -73,6 +73,9 @@ void setup() {
 }
 
 void loop() {
+    Serial.print("steps: ");
+    Serial.println(totalSteps);
+    Serial.print("fast interval: ");
+    Serial.println(fastInterval);
     moveMotor();
-
 }
